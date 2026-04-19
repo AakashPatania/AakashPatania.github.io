@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Aakash Patania — Data Professional</title>
+<link rel="icon" type="jpg" href="Images/icon.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #111110;
+    --bg2: #181817;
+    --bg3: #1f1f1d;
+    --text: #e8e6df;
+    --muted: #888780;
+    --accent: #c9a84c;
+    --accent2: #e2c97e;
+    --border: rgba(255,255,255,0.07);
+    --card-bg: #1a1a18;
+    --nav-h: 60px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    display: flex; align-items: center; justify-content: center;
+    gap: 2.5rem;
+    background: rgba(17,17,16,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+  }
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: color 0.25s;
+  }
+  nav a:hover { color: var(--accent2); }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 0; }
+  .container { max-width: 980px; margin: 0 auto; padding: 0 40px; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 60px;
+    letter-spacing: 0.02em;
+  }
+  .section-title span {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding-top: var(--nav-h);
+    position: relative;
+    overflow: hidden;
+  }
+  #home::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 70% 40%, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 60px;
+    align-items: center;
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+  }
+  .hero-name .line2 {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 24px;
+  }
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+  .hero-photo {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    font-size: 13px;
+    overflow: hidden;
+    position: relative;
+  }
+  .hero-photo img {
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: 50% 20%;
+    transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .hero-photo:hover img { transform: scale(1.05); }
+  .hero-photo .placeholder-text {
+    position: absolute; text-align: center; color: var(--muted);
+    font-size: 13px;
+  }
+  .scroll-hint {
+    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: var(--muted); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    animation: bobble 2s ease-in-out infinite;
+  }
+  .scroll-hint::after {
+    content: '';
+    width: 12px; height: 36px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+  @keyframes bobble { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+  /* ── ABOUT ── */
+  #about { background: var(--bg2); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 60px; align-items: center;
+  }
+  .about-text p {
+    font-size: 16px; line-height: 1.85;
+    color: var(--text); opacity: 0.88;
+    margin-bottom: 16px;
+  }
+  .about-img {
+    width: 100%; aspect-ratio: 1;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 13px;
+  }
+  .about-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .about-img:hover img { transform: scale(1.05); }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .project-card:hover {
+    border-color: rgba(201,168,76,0.35);
+    transform: translateY(-4px);
+  }
+  .project-img {
+    width: 100%; aspect-ratio: 16/9;
+    background: var(--bg3);
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 13px;
+    position: relative;
+  }
+  .project-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .project-card:hover .project-img img { transform: scale(1.07); }
+  .project-img-placeholder { position: absolute; text-align: center; }
+  .project-body { padding: 20px 22px 24px; }
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px; font-weight: 600;
+    color: var(--text); margin-bottom: 8px;
+  }
+  .project-desc {
+    font-size: 13px; color: var(--muted); line-height: 1.6;
+  }
+  .project-link {
+    margin-top: 14px;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; letter-spacing: 0.08em;
+    color: var(--accent); text-transform: uppercase;
+  }
+  .project-link svg { transition: transform 0.2s; }
+  .project-card:hover .project-link svg { transform: translateX(4px); }
+
+  /* ── SKILLS ── */
+  .skills-list li {
+  display: flex;              
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  color: rgba(232,230,223,0.8);
+  line-height: 1.65;
+}
+
+.skill-cat {
+  min-width: 160px;          
+  color: var(--accent);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.skills-list li span + * {
+  flex: 1;                   
+}
+  /* ── EXPERIENCE ── */
+  .exp-list { display: flex; flex-direction: column; gap: 40px; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 32px;
+  }
+  .exp-meta { text-align: right; }
+  .exp-period { font-size: 12px; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+  .exp-loc { font-size: 12px; color: var(--muted); }
+  .exp-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 600; margin-bottom: 4px;
+  }
+  .exp-company { font-size: 14px; color: var(--muted); margin-bottom: 14px; }
+  .exp-bullets { list-style: none; }
+  .exp-bullets li {
+    font-size: 13.5px; color: rgba(232,230,223,0.75);
+    padding: 3px 0 3px 16px;
+    position: relative;
+  }
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute; left: 0;
+    color: var(--accent);
+  }
+
+  /* ── CERTIFICATES ── */
+  #certificates { background: var(--bg2); }
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+  }
+  .cert-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .cert-card:hover {
+    border-color: rgba(201,168,76,0.35);
+    transform: translateY(-4px);
+  }
+  .cert-img {
+    width: 100%; aspect-ratio: 4/3;
+    background: var(--bg3);
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 13px;
+    position: relative;
+  }
+  .cert-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .cert-card:hover .cert-img img { transform: scale(1.07); }
+  .cert-img-placeholder { position: absolute; text-align: center; }
+  .cert-body { padding: 16px 18px; }
+  .cert-title { font-size: 14px; font-weight: 400; color: var(--text); }
+  .cert-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* ── CONTACT ── */
+  .contact-inner {
+    text-align: center; max-width: 560px; margin: 0 auto;
+  }
+  .contact-inner p {
+    color: var(--muted); font-size: 15px; margin-bottom: 48px;
+  }
+  .contact-links {
+    display: flex; justify-content: center; gap: 40px;
+  }
+  .contact-link {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    transition: color 0.25s;
+  }
+  .contact-link:hover { color: var(--accent2); }
+  .contact-icon {
+    width: 48px; height: 48px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.3s;
+  }
+  .contact-link:hover .contact-icon { border-color: var(--accent); }
+  .contact-icon svg { width: 20px; height: 20px; fill: currentColor; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 30px;
+    font-size: 12px; color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── FADE-IN / FADE-OUT ON SCROLL ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.75s cubic-bezier(0.25,0.46,0.45,0.94),
+                transform 0.75s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .fade-up.delay-1 { transition-delay: 0.1s; }
+  .fade-up.delay-2 { transition-delay: 0.2s; }
+  .fade-up.delay-3 { transition-delay: 0.3s; }
+  .fade-up.delay-4 { transition-delay: 0.4s; }
+  .fade-up.delay-5 { transition-delay: 0.5s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 720px) {
+    .hero-grid, .about-grid { grid-template-columns: 1fr; }
+    .hero-photo { aspect-ratio: 1; max-width: 260px; margin: 0 auto; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .cert-grid { grid-template-columns: 1fr 1fr; }
+    .exp-item { grid-template-columns: 1fr; }
+    .exp-meta { text-align: left; }
+    nav { gap: 1.2rem; flex-wrap: wrap; height: auto; padding: 12px 16px; }
+  }
+
+  .highlight {
+  background: linear-gradient(90deg, #ffd700, #ffb700);
+
+  /* Standard property */
+  background-clip: text;
+
+  /* Webkit support */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+  /* ── HERO BUTTONS ── */
+  .hero-btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    color: var(--text);
+    background: transparent;
+    transition: background 0.25s, border-color 0.25s, color 0.25s;
+  }
+  .hero-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent2);
+  }
+  .hero-btn--filled {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+  }
+  .hero-btn--filled:hover {
+    background: var(--accent2);
+    border-color: var(--accent2);
+    color: var(--bg);
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     NAV
+     • To add/remove links: copy or delete an <a> tag
+═══════════════════════════════════════ -->
+<nav>
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#projects">Projects</a>
+  <a href="#skills">Skills</a>
+  <a href="#experience">Experience</a>
+  <a href="#certificates">Certificates</a>
+  <a href="#contact">Contact</a>
+  <a href="https://medium.com/@aakash.patania" target="_blank">Blog</a>
+</nav>
+
+
+<!-- ═══════════════════════════════════════
+     HERO SECTION
+     • Change name, tags, and photo src below
+═══════════════════════════════════════ -->
+<section id="home">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <!-- ↓ Small label above name -->
+        <p class="fade-up" style="font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;">Data Scientist</p>
+
+        <!-- ↓ Your name — split across two lines -->
+        <h1 class="hero-name fade-up delay-1" style="font-size: 52px;">
+
+           Aakash <span class="highlight">Patania</span>
+          
+        </h1>
+
+        <!-- ↓ Skill tags — add/remove <span class="hero-tag"> as needed -->
+        <div class="hero-tags fade-up delay-2">
+          <span class="hero-tag">Machine Learning</span>
+          <span class="hero-tag">Artificial Intelligence</span>
+          <span class="hero-tag">Amazon Web Services</span>
+          <span class="hero-tag">Microsoft Azure</span>
+          <span class="hero-tag">Palantir</span>
+          <span class="hero-tag">Data Platforms &amp; Pipelines</span>
+        </div>
+
+        <!-- ↓ CTA Buttons -->
+        <div class="hero-btns fade-up delay-3" style="display:flex;gap:16px;margin-top:36px;flex-wrap:wrap;">
+            <a href="#projects" class="hero-btn hero-btn--filled">See my work</a>
+            <a href="#contact" class="hero-btn hero-btn--filled">Contact me</a>
+          </div>
+      </div>
+
+      <!-- ↓ Hero photo — uncomment <img> and set src to your image path -->
+      <div class="hero-photo fade-up delay-3">
+      <img src="Images/my.png" alt="Aakash Patania">
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     ABOUT SECTION
+     • Edit the paragraphs and about image
+═══════════════════════════════════════ -->
+<section id="about">
+  <div class="container">
+    <h2 class="section-title fade-up"><span>About</span></h2>
+    <div class="about-grid">
+      <div class="about-text fade-up delay-1">
+        <!-- ↓ Edit your bio paragraphs here -->
+        <p>Data Professional with over 4 years of experience in designing scalable data solutions and analysing complex datasets to drive strategic decisions.</p>
+        <p>Proficient in SQL, Python, Excel, Power BI, Tableau, and cloud platforms (AWS, Azure), with a strong foundation in Statistics and Machine Learning.</p>
+        <p>Experienced in building and automating data pipelines as well as creating impactful dashboards and reports. Proven track record of collaborating with cross-functional teams to deliver actionable insights, improve data accessibility, and fuel business growth.</p>
+      </div>
+
+      <!-- ↓ About image — uncomment <img> and set src -->
+      <div class="about-img fade-up delay-2">
+        <img src="Images/me.jpeg" alt="About"> 
+        <span>Image</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     PROJECTS SECTION
+     • Duplicate a .project-card block to add more projects
+     • Set href to your GitHub repo URL
+     • Uncomment <img> and set src to project screenshot
+═══════════════════════════════════════ -->
+<section id="projects">
+  <div class="container">
+    <h2 class="section-title fade-up"><span>Projects</span></h2>
+    <div class="projects-grid">
+
+      <!-- PROJECT 1 -->
+      <a href="https://github.com/AakashPatania/Youtube-Trending-Data-Pipeline" target="_blank" class="Youtube End-to-End Data Pipeline on AWS">
+        <div class="project-img">
+          <img src="Images/youtube.png" alt="Project 1">
+        </div>
+        <div class="project-body">
+          <p class="project-title">Youtube End-to-End Data Pipeline on AWS </p>
+          <p class="project-desc">Built an end-to-end YouTube data pipeline on AWS to ingest, process, and analyze trending video data across regions. The solution transforms raw data into analytics-ready datasets using a Medallion Architecture (Bronze → Silver → Gold). Implemented using AWS Lambda, Glue, S3, Athena, and Step Functions with integrated data quality checks and orchestration.</p>
+          <span class="project-link">View on Github 
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- PROJECT 2 -->
+      <a href="https://github.com/AakashPatania/Real-time-Weather-Data-Pipeline" target="_blank" class="project-card fade-up delay-2">
+        <div class="project-img">
+          <img src="Images/Weather.png" alt="Real-Time Weather Data Analytics using Kafka, Spark, and Grafana">
+        </div>
+        <div class="project-body">
+          <p class="project-title">Real-Time Weather Data Analytics using Kafka, Spark, and Grafana</p>
+          <p class="project-desc">Designed a real-time pipeline to solve the challenge of processing and visualizing high-frequency streaming data. Leveraged Kafka, Spark Structured Streaming, TimescaleDB, and Grafana to deliver clean, time-series insights through live dashboards.</p>
+          <span class="project-link">View on Github
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- PROJECT 3 -->
+      <a href="https://github.com/AakashPatania/Azure-Retail-Sales-Analytics-Delta-Lake-Pipeline" target="_blank" class="project-card fade-up delay-3">
+        <div class="project-img">
+          <img src="Images/Azure.png" alt="Azure Lakehouse Retail Analytics">
+          
+        </div>
+        <div class="project-body">
+          <p class="project-title">Azure Lakehouse Retail Analytics</p>
+          <p class="project-desc">Built an end-to-end Azure data engineering pipeline to transform raw Adventure Works retail data into actionable business insights. Implemented a Lakehouse architecture using Azure Data Factory, ADLS Gen2, Databricks (PySpark & Delta Lake), Synapse Analytics, and Power BI for scalable ingestion, transformation, and reporting.</p>
+          <span class="project-link">View on Github
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- PROJECT 4 -->
+      <a href="https://github.com/AakashPatania/POC-Projects/blob/main/Online%20Food%20Order%20Prediction%20using%20Python.ipynb" target="_blank" class="project-card fade-up delay-4">
+        <div class="project-img">
+          <img src="Images/Online.png" alt="Online Food Order Prediction System using Machine Learning">
+        </div>
+        <div class="project-body">
+          <p class="project-title">Online Food Order Prediction System using Machine Learning</p>
+          <p class="project-desc">Food order prediction is a valuable technique used by delivery platforms to optimize operations and reduce delivery time. This project involves building a machine learning model to predict whether a customer will place an online food order based on historical data.</p>
+          <span class="project-link">View on Github
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- PROJECT 5 -->
+      <a href="http://github.com/AakashPatania/POC-Projects/blob/main/House%20Rent%20Prediction%20In%20Depth%20Analysis.ipynb" target="_blank" class="project-card fade-up delay-4">
+        <div class="project-img">
+          <img src="Images/Rent.png" alt="House Rent Prediction and Market Analysis using Predictive Models">
+        </div>
+        <div class="project-body">
+          <p class="project-title">House Rent Prediction and Market Analysis using Predictive Models</p>
+          <p class="project-desc">This project involves analyzing 4,700+ rental property records and applying data preprocessing, feature analysis, and visualization techniques to extract insights. Multiple predictive models, including regression-based algorithms, were implemented and evaluated to accurately predict rental prices and determine the best-performing model.</p>
+          <span class="project-link">View on Github
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- PROJECT 6 -->
+      <a href="https://github.com/AakashPatania/Natural-Language-Processing/blob/main/Emotions%20Detection%20Using%20NLP.ipynb" target="_blank" class="project-card fade-up delay-4">
+        <div class="project-img">
+          <img src="Images/NLP.png" alt="Emotion Detection from Text using NLP">
+        </div>
+        <div class="project-body">
+          <p class="project-title">Emotion Detection from Text using NLP</p>
+          <p class="project-desc">Built an NLP-based emotion detection system to classify text into emotions like joy and sadness. Applied preprocessing, feature extraction, and multiple classification algorithms to achieve accurate predictions.</p>
+          <span class="project-link">View on Github
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     SKILLS SECTION
+     • Edit each <li> — the <span class="skill-cat"> is the category label
+     • Add or remove <li> rows freely
+═══════════════════════════════════════ -->
+<section id="skills">
+  <div class="container">
+    <h2 class="section-title fade-up"><span>Skills</span></h2>
+    <ul class="skills-list">
+      <li class="fade-up delay-1"><span class="skill-cat">Programming</span>Python (NumPy, Pandas, Pyspark, Seaborn, Matplotlib, Scikit-learn, Spacy), C, HTML, CSS</li>
+      <li class="fade-up delay-2"><span class="skill-cat">Databases</span>SQL (MS SQL Server, MySQL, PostgreSQL, Oracle)</li>
+      <li class="fade-up delay-3"><span class="skill-cat">Visualization</span>Power BI (DAX calculations, Charts, Slicers, Filters etc.), Tableau, Grafana, MS Excel, PowerPoint</li>
+      <li class="fade-up delay-4"><span class="skill-cat">Other Tools</span>Palantir, Apache Spark, Databricks, Snowflake, Apache Airflow, Apache Kafka, Docker, Git, Slate, Quiver, Contour, Activ etc.</li>
+      <li class="fade-up delay-5"><span class="skill-cat">Analytics</span>Descriptive and Predictive Analytics, Statistical Analysis, Exploratory Data Analysis, Feature Engineering</li>
+      <li class="fade-up delay-1"><span class="skill-cat">Technical</span>Hypothesis Testing, A/B Testing, ETL Processes, Data Wrangling, Data Modeling, Machine Learning Algorithms, Web Scraping, Natural Language Processing</li>
+      <li class="fade-up delay-2"><span class="skill-cat">Soft Skills</span>Excellent verbal and written communication, presentation skills, strong storytelling ability, client management, problem-solving, critical thinking, and attention to detail</li>
+      <li class="fade-up delay-3"><span class="skill-cat">Cloud</span>AWS (Glue, Athena, Step Functions, Redshift, Lambda, SNS), Microsoft Azure (Data Factory, Synapse Analytics)</li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     EXPERIENCE SECTION
+     • Duplicate a .exp-item block to add more roles
+     • Edit period, location, role, company, and bullet points
+═══════════════════════════════════════ -->
+<section id="experience">
+  <div class="container">
+    <h2 class="section-title fade-up"><span>Experience</span></h2>
+    <div class="exp-list">
+
+      <!-- JOB 1 -->
+      <div class="exp-item fade-up delay-1">
+        <div class="exp-meta">
+          <p class="exp-period">2024 — Present</p>       <!-- ← Date range -->
+          <p class="exp-loc">Pune, Maharashtra, India</p> <!-- ← Location -->
+        </div>
+        <div>
+          <p class="exp-role">Data Engineer</p>         <!-- ← Job title -->
+          <p class="exp-company">Segula Technologies India Pvt. Ltd.</p>  <!-- ← Company -->
+        </div>
+      </div>
+
+      <!-- JOB 2 -->
+      <div class="exp-item fade-up delay-2">
+        <div class="exp-meta">
+          <p class="exp-period">2020 — 2023</p>
+          <p class="exp-loc">Bengaluru, Karnataka, India</p>
+        </div>
+        <div>
+          <p class="exp-role">Senior System Engineer</p>
+          <p class="exp-company">Cognizant Technology Solutions</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     CERTIFICATES SECTION
+     • Set href to the certificate platform URL
+     • Uncomment <img> and set src to certificate image
+     • Duplicate a .cert-card to add more
+═══════════════════════════════════════ -->
+<section id="certificates">
+  <div class="container">
+    <h2 class="section-title fade-up"><span>Courses and Certificates</span></h2>
+    <div class="cert-grid">
+
+      <!-- CERT 1 -->
+      
+      <div class="cert-card fade-up delay-2">
+        <div class="cert-img">
+          <img src="Images/udemy2.jpg" alt="Machine Learning"> 
+        </div>
+      
+        <div class="cert-body">
+          <p class="cert-title">Machine Learning</p>
+          <p class="cert-sub">Completed Certification</p>
+        </div>
+      </div>
+    
+
+      <!-- CERT 2 -->
+
+      <div class="cert-card fade-up delay-2">
+        <div class="cert-img">
+          <img src="Images/Udemy1.jpg" alt="Power BI"> 
+        </div>
+      
+        <div class="cert-body">
+          <p class="cert-title">Microsoft Power BI Desktop</p>
+          <p class="cert-sub">Completed Certification</p>
+        </div>
+      </div>
+
+      <!-- CERT 3 -->
+      <div class="cert-card fade-up delay-2">
+        <div class="cert-img">
+          <img src="Images/Spark.jpg" alt="Apache Spark"> 
+        </div>
+      
+        <div class="cert-body">
+          <p class="cert-title">Apache Spark</p>
+          <p class="cert-sub">Completed Certification</p>
+        </div>
+      </div>
+
+      <!-- CERT 3 -->
+      <div class="cert-card fade-up delay-2">
+        <div class="cert-img">
+          <img src="Images/Snowflake.jpg" alt="Snowflake-The Complete Masterclass"> 
+        </div>
+      
+        <div class="cert-body">
+          <p class="cert-title">Snowflake - The Complete Masterclass</p>
+          <p class="cert-sub">Completed Certification</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     CONTACT SECTION
+     • Set mailto: to your real email
+     • Set GitHub and LinkedIn href to your profiles
+═══════════════════════════════════════ -->
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title fade-up"><span>Contact</span></h2>
+    <div class="contact-inner fade-up delay-1">
+      <p>Open to new opportunities. Feel free to reach out.</p>
+      <div class="contact-links">
+
+        <a href="mailto:aakash.patania@gmail.com" target="_blank" class="contact-link"> <!-- ← your email -->
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </span>
+          Email
+        </a>
+
+        <a href="https://github.com/AakashPatania" target="_blank" class="contact-link"> <!-- ← your GitHub -->
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          </span>
+          Github
+        </a>
+
+        <a href="https://www.linkedin.com/in/aakash-patania/" target="_blank" class="contact-link"> <!-- ← your LinkedIn -->
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </span>
+          LinkedIn
+        </a>
+
+        <a href="https://medium.com/@aakash.patania" target="_blank" class="contact-link">
+          <span class="contact-icon">
+            <!-- Medium SVG -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4.5c0-.28.22-.5.5-.5h4.3c.2 0 .39.1.48.27l3.38 6.9 3.7-6.9c.09-.17.28-.27.48-.27H19.5c.28 0 .5.22.5.5v15c0 .28-.22.5-.5.5h-4.3a.5.5 0 0 1-.5-.5v-9.5l-3.3 6.1c-.09.17-.28.27-.48.27-.2 0-.39-.1-.48-.27L7 10v9.5a.5.5 0 0 1-.5.5H2.5a.5.5 0 0 1-.5-.5v-15z"/>
+            </svg>
+          </span>
+          Medium
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     FOOTER — edit year / name
+═══════════════════════════════════════ -->
+<footer>
+  <p>© 2025 Aakash Patania &nbsp;·&nbsp; Designed &amp; built with care</p>
+</footer>
+
+
+<!-- ═══════════════════════════════════════
+     SCROLL FADE SCRIPT — do not edit
+═══════════════════════════════════════ -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
